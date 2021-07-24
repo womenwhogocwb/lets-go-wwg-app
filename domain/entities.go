@@ -21,8 +21,8 @@ const (
 type Game struct {
 	ID         string
 	PlayerName string
-	PlayerMove string
-	HouseMove  string
-	Result     string
+	PlayerMove Move
+	HouseMove  Move
+	Result     Result
 	CreatedAt  time.Time
 }
