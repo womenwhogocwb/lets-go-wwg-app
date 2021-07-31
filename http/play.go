@@ -23,12 +23,6 @@ type PlayResponse struct {
 	CreatedAt  string `json:"created_at"`
 }
 
-const (
-	ContentType     = "Content-Type"
-	JSONContentType = "application/json"
-	DateLayout      = "2006-01-02T15:04:05Z"
-)
-
 func (s Server) Play(w http.ResponseWriter, r *http.Request) {
 	var body PlayRequest
 	err := json.NewDecoder(r.Body).Decode(&body)

@@ -8,6 +8,12 @@ import (
 	"github.com/womenwhogocwb/lets-go-wwg-app/domain/usecases"
 )
 
+const (
+	ContentType     = "Content-Type"
+	JSONContentType = "application/json"
+	DateLayout      = "2006-01-02T15:04:05Z"
+)
+
 type Error struct {
 	Reason string `json:"reason"`
 }
@@ -23,6 +29,7 @@ func NewServer(games usecases.Games) Server {
 
 	// API Routes
 	router.HandleFunc("/games", server.Play).Methods(http.MethodPost)
+	router.HandleFunc("/games", server.ListAll).Methods(http.MethodGet)
 
 	server.Handler = router
 	return server
