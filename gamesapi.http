@@ -1,0 +1,49 @@
+GET http://localhost:3000/games
+Accept: application/json
+
+###
+POST http://localhost:3000/games
+Content-Type: application/json
+
+{
+  "name": "Amy Santiago",
+  "move": "pedra"
+}
+
+###
+POST http://localhost:3000/games
+Content-Type: application/json
+
+{
+  "name": "Rosa Diaz",
+  "move": "tesoura"
+}
+
+###
+POST http://localhost:3000/games
+Content-Type: application/json
+
+{
+  "name": "Gina Linetti",
+  "move": "pedra"
+}
+
+###
+POST http://localhost:3000/games
+Content-Type: application/json
+
+{
+  "name": "",
+  "move": "pedra"
+}
+
+###
+POST http://localhost:3000/games
+Content-Type: application/json
+
+{
+  "name": "Gina Linetti",
+  "move": "par"
+}
+
+###
