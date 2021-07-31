@@ -9,7 +9,7 @@ import (
 )
 
 type Error struct {
-	Reason string
+	Reason string `json:"reason"`
 }
 
 type Server struct {

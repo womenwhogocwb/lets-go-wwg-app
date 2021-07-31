@@ -2,22 +2,25 @@ package http
 
 import (
 	"encoding/json"
+	"errors"
 	"log"
 	"net/http"
+
+	"github.com/womenwhogocwb/lets-go-wwg-app/domain"
 )
 
 type PlayRequest struct {
-	Name string
-	Move string
+	Name string `json:"name"`
+	Move string `json:"move"`
 }
 
 type PlayResponse struct {
-	ID         string
-	PlayerName string
-	PlayerMove string
-	HouseMove  string
-	Result     string
-	CreatedAt  string
+	ID         string `json:"id"`
+	PlayerName string `json:"player_name"`
+	PlayerMove string `json:"player_move"`
+	HouseMove  string `json:"house_move"`
+	Result     string `json:"result"`
+	CreatedAt  string `json:"created_at"`
 }
 
 const (
@@ -40,9 +43,24 @@ func (s Server) Play(w http.ResponseWriter, r *http.Request) {
 
 	game, err := s.games.Play(body.Name, body.Move)
 	if err != nil {
-		// TODO handle errors
 		log.Printf("failed to play game: %s\n", err.Error())
-		w.WriteHeader(http.StatusInternalServerError)
+		switch {
+		case errors.Is(err, domain.ErrInvalidMove):
+			response := Error{Reason: "invalid move"}
+			w.Header().Set(ContentType, JSONContentType)
+			w.WriteHeader(http.StatusBadRequest)
+			json.NewEncoder(w).Encode(response)
+		case errors.Is(err, domain.ErrInvalidName):
+			response := Error{Reason: "invalid name"}
+			w.Header().Set(ContentType, JSONContentType)
+			w.WriteHeader(http.StatusBadRequest)
+			json.NewEncoder(w).Encode(response)
+		default:
+			response := Error{Reason: "internal server error"}
+			w.Header().Set(ContentType, JSONContentType)
+			w.WriteHeader(http.StatusInternalServerError)
+			json.NewEncoder(w).Encode(response)
+		}
 		return
 	}
 
