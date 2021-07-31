@@ -4,8 +4,7 @@ import (
 	"net/http"
 
 	"github.com/gorilla/mux"
-
-	"github.com/womenwhogocwb/lets-go-wwg-app/domain/usecases"
+	"github.com/womenwhogocwb/lets-go-wwg-app/domain"
 )
 
 const (
@@ -19,12 +18,12 @@ type Error struct {
 }
 
 type Server struct {
-	games usecases.Games
+	games domain.Usecase
 	http.Handler
 }
 
-func NewServer(games usecases.Games) Server {
-	server := Server{games: games}
+func NewServer(usecase domain.Usecase) Server {
+	server := Server{games: usecase}
 	router := mux.NewRouter()
 
 	// API Routes
