@@ -3,6 +3,8 @@ package domain
 import (
 	"errors"
 	"time"
+
+	"github.com/google/uuid"
 )
 
 var (
@@ -47,7 +49,7 @@ func NewGame(name, move string) (Game, error) {
 	}
 
 	return Game{
-		ID:         "1",
+		ID:         uuid.New().String(),
 		PlayerName: name,
 		PlayerMove: Move(move),
 		CreatedAt:  time.Now(),
