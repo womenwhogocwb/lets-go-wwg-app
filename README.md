@@ -16,8 +16,8 @@ Disponibilizar, por meio uma API HTTP Rest, um jogo de "Pedra, Papel, Tesoura".
 - Body:
     ```json
     {
-    "name": "Leslie Knope",
-    "move": "tesoura"
+      "name": "Leslie Knope",
+      "move": "tesoura"
     }
     ```
 
@@ -43,7 +43,7 @@ Disponibilizar, por meio uma API HTTP Rest, um jogo de "Pedra, Papel, Tesoura".
 
 - Status code: `400`, `500`
 - Content-Type: `application/json`
-- Body:
+- Body (example):
   ```json
   {
     "reason": "invalid move"
@@ -54,8 +54,50 @@ Disponibilizar, por meio uma API HTTP Rest, um jogo de "Pedra, Papel, Tesoura".
 
 #### Request
 
-[comment]: <> (preencher)
+- Path: `/games`
+- Method: `GET`
 
 #### Response
 
-[comment]: <> (preencher)
+##### Success
+
+- Status code: `200`
+- Content-Type: `application/json`
+- Body:
+  ```json
+  [
+    {
+      "id": "647e1f05-5ceb-45ab-8f4a-b67510f6deb3",
+      "player_name": "Amy Santiago",
+      "player_move": "pedra",
+      "house_move": "tesoura",
+      "result": "victory",
+      "created_at": "2021-08-06T10:57:43Z"
+    },
+    {
+      "id": "8359fa5c-6901-47b1-93ff-6bcbf465e5aa",
+      "player_name": "Rosa Diaz",
+      "player_move": "tesoura",
+      "house_move": "pedra",
+      "result": "defeat",
+      "created_at": "2021-08-06T10:57:51Z"
+    }
+  ]
+  ```
+  
+##### Failure
+
+- Status code: `500`
+- Content-Type: `application/json`
+- Body (example):
+  ```json
+  {
+    "reason": "internal server error"
+  }
+  ```
+  
+## Exercício extra do Let's Go!
+
+- Adicionar mais um endpoint à aplicação. Exemplos que podem ser explorados: consultar um jogo usando seu ID, listar todos os jogos de uma mesma pessoa
+- Adicionar testes à camada HTTP
+
