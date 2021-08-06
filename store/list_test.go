@@ -38,12 +38,17 @@ func TestGameStore_ListAll(t *testing.T) {
 			t.Errorf("expected %d; got %d", want, len(games))
 		}
 
-		if games[game1.ID] != game1 {
-			t.Errorf("expected %v; got %v", game1, games[game1.ID])
-		}
-
-		if games[game2.ID] != game2 {
-			t.Errorf("expected %v; got %v", game2, games[game2.ID])
+		for _, game := range games {
+			if game.ID == game1.ID {
+				if game != game1 {
+					t.Errorf("expected %+v; got %+v", game1, game)
+				}
+			}
+			if game.ID == game2.ID {
+				if game != game2 {
+					t.Errorf("expected %+v; got %+v", game2, game)
+				}
+			}
 		}
 	})
 }
