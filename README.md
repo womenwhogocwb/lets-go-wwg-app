@@ -98,6 +98,9 @@ Disponibilizar, por meio uma API HTTP Rest, um jogo de "Pedra, Papel, Tesoura".
   
 ## Exercício extra do Let's Go!
 
-- Adicionar mais um endpoint à aplicação. Exemplos que podem ser explorados: consultar um jogo usando seu ID, listar todos os jogos de uma mesma pessoa
-- Adicionar testes à camada HTTP
+1. Faça um _fork_ desse repositório. Se não souber como, [aqui tem uma explicação](https://docs.github.com/pt/github/getting-started-with-github/quickstart/fork-a-repo#prerequisties)
+2. Faça um clone local do seu _fork_. Se não souber como, [aqui tem uma explicação](https://docs.github.com/pt/github/getting-started-with-github/quickstart/fork-a-repo#configuring-git-to-sync-your-fork-with-the-original-repository)
+3. Com seu _fork_ disponível localmente, realize as seguintes adições ao projeto:
+    - Adicionar mais um endpoint à aplicação. Exemplos que podem ser explorados: consultar um jogo usando seu identificador, listar todos os jogos de uma mesma pessoa
+    - Adicionar testes à camada HTTP
 
