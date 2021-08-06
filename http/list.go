@@ -18,7 +18,7 @@ type ListResponse struct {
 func (s Server) ListAll(w http.ResponseWriter, r *http.Request) {
 	list, err := s.games.ListAll()
 	if err != nil {
-		log.Printf("failed to list games: %w\n", err)
+		log.Printf("failed to list games: %s\n", err.Error())
 		response := Error{Reason: "internal server error"}
 		w.Header().Set(ContentType, JSONContentType)
 		w.WriteHeader(http.StatusInternalServerError)
@@ -26,7 +26,7 @@ func (s Server) ListAll(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// []domain.Game --> []ListResponse
+	// Build response based on the usecase output
 	response := make([]ListResponse, len(list))
 	for i, game := range list {
 		response[i].ID = game.ID
