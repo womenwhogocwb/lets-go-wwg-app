@@ -14,12 +14,12 @@ Disponibilizar, por meio uma API HTTP Rest, um jogo de "Pedra, Papel, Tesoura".
 - Method: `POST`
 - Content-Type: `application/json`
 - Body:
-    ```json
-    {
-      "name": "Leslie Knope",
-      "move": "tesoura"
-    }
-    ```
+  ```json
+  {
+    "name": "Leslie Knope",
+    "move": "tesoura"
+  }
+  ```
 
 #### Response
 
@@ -84,7 +84,7 @@ Disponibilizar, por meio uma API HTTP Rest, um jogo de "Pedra, Papel, Tesoura".
     }
   ]
   ```
-  
+
 ##### Failure
 
 - Status code: `500`
@@ -95,12 +95,47 @@ Disponibilizar, por meio uma API HTTP Rest, um jogo de "Pedra, Papel, Tesoura".
     "reason": "internal server error"
   }
   ```
-  
+
+### Listar um jogo pelo identificador
+
+#### Request
+
+- Path: `/games/{id}`
+- Method: `GET`
+
+#### Response
+
+##### Success
+
+- Status code: `200`
+- Content-Type: `application/json`
+- Body:
+  ```json
+  {
+    "id": "647e1f05-5ceb-45ab-8f4a-b67510f6deb3",
+    "player_name": "Amy Santiago",
+    "player_move": "pedra",
+    "house_move": "tesoura",
+    "result": "victory",
+    "created_at": "2021-08-06T10:57:43Z"
+  }
+  ```
+
+##### Failure
+
+- Status code: `500`
+- Content-Type: `application/json`
+- Body (example):
+  ```json
+  {
+    "reason": "internal server error"
+  }
+  ```
+
 ## Exercício extra do Let's Go!
 
 1. Faça um _fork_ desse repositório. Se não souber como, [aqui tem uma explicação](https://docs.github.com/pt/github/getting-started-with-github/quickstart/fork-a-repo#prerequisties)
 2. Faça um clone local do seu _fork_. Se não souber como, [aqui tem uma explicação](https://docs.github.com/pt/github/getting-started-with-github/quickstart/fork-a-repo#configuring-git-to-sync-your-fork-with-the-original-repository)
 3. Com seu _fork_ disponível localmente, realize as seguintes adições ao projeto:
-    - Adicionar mais um endpoint à aplicação. Exemplos que podem ser explorados: consultar um jogo usando seu identificador, listar todos os jogos de uma mesma pessoa
-    - Adicionar testes à camada HTTP
-
+   - Adicionar mais um endpoint à aplicação. Exemplos que podem ser explorados: consultar um jogo usando seu identificador, listar todos os jogos de uma mesma pessoa
+   - Adicionar testes à camada HTTP

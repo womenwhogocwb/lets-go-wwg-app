@@ -4,6 +4,9 @@ import (
 	"encoding/json"
 	"log"
 	"net/http"
+
+	"github.com/gorilla/mux"
+	"github.com/womenwhogocwb/lets-go-wwg-app/domain"
 )
 
 type ListResponse struct {
@@ -40,4 +43,32 @@ func (s Server) ListAll(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set(ContentType, JSONContentType)
 	json.NewEncoder(w).Encode(response)
 	log.Printf("sent list all games successful response with %d games", len(response))
+}
+
+func (s Server) ListOne(w http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r)
+
+	gameId := domain.GameId(vars["ID"])
+
+	game, err := s.games.ListGameById(gameId)
+
+	if err != nil {
+		log.Printf("Failed to list game: %s\n", err.Error())
+		response := Error{Reason: "internal server error"}
+		w.Header().Set(ContentType, JSONContentType)
+		w.WriteHeader(http.StatusInternalServerError)
+		json.NewEncoder(w).Encode(response)
+		return
+	}
+
+	response := ListResponse{
+		ID:         game.ID,
+		PlayerName: game.PlayerName,
+		PlayerMove: string(game.PlayerMove),
+		HouseMove:  string(game.HouseMove),
+		Result:     string(game.Result),
+	}
+
+	w.Header().Set(ContentType, JSONContentType)
+	json.NewEncoder(w).Encode(response)
 }
