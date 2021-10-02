@@ -39,6 +39,8 @@ type Game struct {
 	CreatedAt  time.Time
 }
 
+type GameId string
+
 func NewGame(name, move string) (Game, error) {
 	if Move(move) != Pedra && Move(move) != Papel && Move(move) != Tesoura {
 		return Game{}, ErrInvalidMove

@@ -29,6 +29,7 @@ func NewServer(usecase domain.Usecase) Server {
 	// API Routes
 	router.HandleFunc("/games", server.Play).Methods(http.MethodPost)
 	router.HandleFunc("/games", server.ListAll).Methods(http.MethodGet)
+	router.HandleFunc("/games/{ID}", server.ListOne).Methods(http.MethodGet)
 
 	server.Handler = router
 	return server

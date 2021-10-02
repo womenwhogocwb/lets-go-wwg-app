@@ -14,3 +14,13 @@ func (g Games) ListAll() ([]domain.Game, error) {
 
 	return list, nil
 }
+
+func (g Games) ListGameById(id domain.GameId) (domain.Game, error) {
+	game, err := g.store.ListOne(id)
+
+	if err != nil {
+		return domain.Game{}, fmt.Errorf("Could not list game: %v\n", err)
+	}
+
+	return game, nil
+}
